@@ -1,0 +1,28 @@
+{
+  "name": "vitawatch-spectra",
+  "version": "1.0.0",
+  "description": "VitaWatch Spectra — Cyber-Medical Biometric Telemetry & AI Wellness Platform",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "start": "npm --prefix frontend start",
+    "lint": "npm --prefix frontend run lint",
+    "backend": "py app.py",
+    "test:backend": "py -m unittest backend\\tests\\test_api.py",
+    "simulate:esp32": "py scripts/simulate_esp32.py 10",
+    "install:frontend": "npm --prefix frontend install",
+    "install:backend": "pip install -r requirements.txt",
+    "install:all": "pip install -r requirements.txt && npm --prefix frontend install"
+  },
+  "keywords": [
+    "vitawatch",
+    "biometric",
+    "telemetry",
+    "healthcare",
+    "iot",
+    "esp32",
+    "ai"
+  ],
+  "author": "Sandeep Roshan S D"
+}
