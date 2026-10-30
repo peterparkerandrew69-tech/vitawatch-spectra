@@ -1,0 +1,5 @@
+Timestamp,Incident_Type,Detected_Location,Fall_Severity,GPS_Coordinates,Resolution_Status
+2026-05-17T14:32:00Z,Fall Detected,Kitchen,Critical,"13.0827° N, 80.2707° E",Responded
+2026-05-16T09:15:00Z,Fall Detected,Bathroom,Warning,"13.0825° N, 80.2705° E",Auto-cleared
+2026-05-14T18:40:00Z,Fall Detected,Stairs,Warning,"13.0829° N, 80.2709° E",Responded
+2026-05-11T22:10:00Z,Cardiac Warning,Living Room,Critical,"13.0827° N, 80.2707° E",Responded
