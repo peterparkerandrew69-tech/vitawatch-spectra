@@ -135,7 +135,53 @@ When transmitted, the dashboard status badge instantly transitions from `DEMO / 
 
 ---
 
-## 6. Security, Privacy & Non-Diagnostic Disclosure
+## 6. Deployment Guide (Vercel & Full-Stack)
+
+### Architecture in Production
+- **Frontend**: Hosted on **Vercel** (Next.js 16 with automatic Edge CDN, SSR, and Turbopack optimizations).
+- **Backend**: Hosted on **Render**, **Railway**, **Fly.io**, or any cloud VM / Docker container (handling persistent SQLite/PostgreSQL, ML models, and high-frequency ESP32 sensor streams).
+
+---
+
+### Step 1: Deploy Frontend to Vercel
+
+#### Method A: Via Vercel Web Dashboard (Recommended)
+1. Push your repository to GitHub: `https://github.com/peterparkerandrew69-tech/vitawatch-spectra`.
+2. Go to [vercel.com](https://vercel.com) and click **"Add New Project"**.
+3. Import your **`vitawatch-spectra`** repository.
+4. In the configuration screen:
+   - **Framework Preset**: `Next.js`
+   - **Root Directory**: Click *Edit* and select **`frontend`** (or keep root `./` as `vercel.json` is pre-configured).
+5. In **Environment Variables**, add:
+   - `NEXT_PUBLIC_API_BASE_URL` = URL of your backend (e.g. `https://vitawatch-backend.onrender.com` or leave empty for demo mode).
+6. Click **Deploy**.
+
+#### Method B: Via Vercel CLI
+```bash
+# Log in to Vercel
+vercel login
+
+# Deploy the frontend
+cd frontend
+vercel --prod
+```
+
+---
+
+### Step 2: Deploy Backend (Render / Railway / Docker)
+
+The backend includes a pre-configured `render.yaml`, `Procfile`, and `Dockerfile`.
+
+#### Deploying on Render (Free / 1-Click Blueprint)
+1. Go to [render.com](https://render.com) and click **New > Blueprint**.
+2. Select your `vitawatch-spectra` repository.
+3. Render reads `render.yaml` and deploys the Flask application automatically using `gunicorn app:app`.
+4. Copy your backend URL (e.g., `https://vitawatch-spectra-backend.onrender.com`).
+5. Add this URL to your Vercel project's environment variables as `NEXT_PUBLIC_API_BASE_URL`.
+
+---
+
+## 7. Security, Privacy & Non-Diagnostic Disclosure
 
 1. **Non-Diagnostic Notice**: VitaWatch Spectra provides wellness insights and educational biotelemetry tracking. It is **not** an FDA-approved medical diagnostic device.
 2. **Honest Delivery Status**: Emergency alert deliveries are tracked with genuine provider checks. When Twilio or SendGrid credentials are not configured, delivery status is accurately reported as `not_configured` rather than pretending alerts were delivered.

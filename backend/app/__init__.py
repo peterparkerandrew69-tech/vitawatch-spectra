@@ -10,11 +10,19 @@ def create_app(config_class=Config):
 
     # Initialize extensions
     db.init_app(app)
-    cors.init_app(
-        app,
-        resources={r"/api/*": {"origins": ["http://localhost:3000", "http://127.0.0.1:3000", "http://localhost:5000"]}},
-        supports_credentials=True
-    )
+    cors_origins = app.config.get('CORS_ORIGINS', ['*'])
+    if '*' in cors_origins:
+        cors.init_app(
+            app,
+            resources={r"/api/*": {"origins": "*"}},
+            supports_credentials=False
+        )
+    else:
+        cors.init_app(
+            app,
+            resources={r"/api/*": {"origins": cors_origins}},
+            supports_credentials=True
+        )
 
     # Register blueprints
     from app.routes.health import health_bp

@@ -16,7 +16,8 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
     # CORS
-    CORS_ORIGINS = os.environ.get('CORS_ORIGINS', 'http://localhost:3000,http://127.0.0.1:3000').split(',')
+    raw_cors = os.environ.get('CORS_ORIGINS', 'http://localhost:3000,http://127.0.0.1:3000,http://localhost:5000,*')
+    CORS_ORIGINS = [o.strip() for o in raw_cors.split(',') if o.strip()]
     
     # Device Ingestion Security
     DEVICE_INGEST_KEY = os.environ.get('DEVICE_INGEST_KEY', 'esp32-spectra-gateway-key-2026')
